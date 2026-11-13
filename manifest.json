@@ -1,0 +1,16 @@
+{
+  "name": "Simulador de Pago M\u00ednimo de Tarjeta 2026 | Intereses y Bola de Nieve",
+  "short_name": "Pago M\u00ednimo",
+  "start_url": "https://sebiglesias.com.ar/pago-minimo-tarjeta/",
+  "display": "standalone",
+  "background_color": "#0c0809",
+  "theme_color": "#ef4444",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

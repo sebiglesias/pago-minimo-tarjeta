@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BNDBQP0W7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2BNDBQP0W7');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Pago Mínimo de Tarjeta 2026 | Intereses y Bola de Nieve</title>
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ef4444">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <meta name="description" content="Simulá qué pasa si pagás el mínimo de la tarjeta de crédito en Argentina. Calculá los intereses compensatorios, IVA y sellados para no caer en la bola de nieve.">
+  <meta name="keywords" content="simulador pago minimo tarjeta, cuanto cobra de interes la tarjeta de credito argentina, pago minimo bola de nieve, intereses compensatorios tarjeta, que pasa si pago el minimo de la tarjeta visa">
+  <link rel="canonical" href="https://sebiglesias.com.ar/pago-minimo-tarjeta/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Simulador de Pago Mínimo de Tarjeta 2026 | Intereses Argentina">
+  <meta property="og:description" content="Simulá el impacto financiero de pagar el mínimo de la tarjeta de crédito y cómo crece tu deuda.">
+  <meta property="og:url" content="https://sebiglesias.com.ar/pago-minimo-tarjeta/">
+  <meta property="og:site_name" content="Simulador de Tarjeta Argentina">
+  <meta property="og:locale" content="es_AR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Simulador de Pago Mínimo de Tarjeta 2026">
+  <meta name="twitter:description" content="Calculá intereses compensatorios, IVA y proyección de deuda si pagás el mínimo.">
+
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-3381238987477190">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3381238987477190" crossorigin="anonymous"></script>
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Simulador de Pago Mínimo de Tarjeta Argentina",
+        "url": "https://sebiglesias.com.ar/pago-minimo-tarjeta/",
+        "description": "Calculadora de intereses y bola de nieve financiera por pago mínimo de tarjeta.",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "ARS" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Qué pasa si pago solo el pago mínimo de la tarjeta de crédito?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Al pagar el mínimo, el banco cancela únicamente una fracción menor del capital y refinancia todo el saldo restante a una tasa nominal muy elevada (TNA superior al 95-115%). El mes siguiente se te cobran intereses compensatorios, más el 21% de IVA sobre dichos intereses y el impuesto a los sellos provincial, haciendo que tu deuda total crezca incluso sin haber hecho compras nuevas."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo se calculan los intereses de la tarjeta de crédito en Argentina?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La fórmula diaria es: (Saldo no abonado * TNA / 365) * 30 días. A ese monto se le suma el 21% de IVA que cobra AFIP/ARCA sobre intereses bancarios y el 1% a 1.2% de impuesto de sellos provincial."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0c0809;
+      --surface: #181012;
+      --surface-raised: #24181b;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent: #ef4444;
+      --accent-muted: rgba(239, 68, 68, 0.14);
+      --accent-border: rgba(239, 68, 68, 0.35);
+      --teal: #06b6d4;
+      --radius-sm: 6px;
+      --radius: 10px;
+      --radius-lg: 14px;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      background-image: radial-gradient(ellipse 90% 40% at 50% 0%, rgba(239, 68, 68, 0.15) 0%, transparent 80%),
+                        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255, 255, 255, 0.015) 39px, rgba(255, 255, 255, 0.015) 40px);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { width: 100%; max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; }
+    .app-header { margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+    .badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+    .tag { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 8px; border-radius: var(--radius-sm); background: var(--surface-raised); color: var(--text-muted); border: 1px solid var(--border); }
+    .tag.tag-accent { background: var(--accent-muted); color: var(--accent); border-color: var(--accent-border); }
+    h1 { font-size: clamp(20px, 4vw, 26px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; color: var(--text); }
+    .subtitle { color: var(--text-muted); font-size: 14px; line-height: 1.45; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; }
+    .card-title { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
+    .form-group { margin-bottom: 14px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .helper-text { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+    input[type="number"], select { width: 100%; background: var(--surface-raised); border: 1px solid var(--border-strong); border-radius: var(--radius-sm); padding: 9px 12px; font-family: var(--font-sans); font-size: 14px; color: var(--text); outline: none; }
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 500px) { .input-row { grid-template-columns: 1fr; } }
+    .hero-result { background: linear-gradient(135deg, var(--surface-raised) 0%, var(--surface) 100%); border: 1px solid var(--accent-border); border-radius: var(--radius-lg); padding: 24px 20px; margin-bottom: 16px; text-align: center; }
+    .hero-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 6px; }
+    .hero-amount { font-family: var(--font-mono); font-size: clamp(34px, 7vw, 46px); font-weight: 800; color: var(--accent); letter-spacing: -0.02em; margin-bottom: 16px; }
+    .hero-subrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; border-top: 1px solid var(--border); padding-top: 16px; }
+    .hero-sublabel { font-size: 11px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; }
+    .hero-subval { font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: var(--text); }
+    .hero-subval.highlight { color: #f59e0b; }
+    .breakdown-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .breakdown-table tr { border-bottom: 1px solid var(--border); }
+    .breakdown-table tr:last-child { border-bottom: none; }
+    .breakdown-table td { padding: 10px 0; }
+    .col-label { color: var(--text); font-weight: 500; }
+    .col-sub { display: block; font-size: 11px; color: var(--text-dim); }
+    .col-val { font-family: var(--font-mono); text-align: right; font-weight: 600; color: var(--text); }
+    .alert-box { padding: 14px; border-radius: var(--radius-sm); margin-top: 14px; font-size: 12px; line-height: 1.45; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; }
+    .seo-table-wrap { overflow-x: auto; margin-top: 12px; }
+    .seo-table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
+    .seo-table th { background: var(--surface-raised); color: var(--text-muted); padding: 8px 10px; font-weight: 600; border-bottom: 1px solid var(--border-strong); }
+    .seo-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--text); font-family: var(--font-mono); }
+    .seo-table td.strong { font-family: var(--font-sans); font-weight: 600; }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+    .faq-item { border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .faq-a { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+    .family-nav { margin: 28px auto 16px; padding: 16px 0; border-top: 1px solid var(--border); text-align: left; }
+    .family-title { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); font-weight: 700; margin-bottom: 10px; }
+    .family-links { display: flex; flex-wrap: wrap; gap: 6px; }
+    .family-link { padding: 5px 10px; border-radius: 6px; font-size: 12px; font-weight: 500; text-decoration: none; color: var(--text-muted); background: var(--surface-raised); border: 1px solid var(--border); }
+    .family-link.active { background: var(--accent-muted); border-color: var(--accent); color: var(--accent); font-weight: 700; }
+    footer { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center; font-size: 12px; color: var(--text-dim); }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="app-header">
+      <div class="badge-row">
+        <span class="tag tag-accent">Finanzas Personales</span>
+        <span class="tag">Tarjetas de Crédito 2026</span>
+      </div>
+      <h1>Simulador de Pago Mínimo de Tarjeta</h1>
+      <p class="subtitle">Calculá cuánta plata tirás a la basura en intereses compensatorios, IVA y sellados al pagar solo el mínimo de tu resumen bancario.</p>
+    </header>
+
+    <!-- Parámetros del Resumen -->
+    <section class="card">
+      <div class="card-title">Datos de tu Resumen Bancario</div>
+      
+      <div class="input-row">
+        <div class="form-group">
+          <label for="totalDebtInput">Total a Pagar del Mes ($)</label>
+          <input type="number" id="totalDebtInput" value="350000" step="10000" oninput="syncMinPayment()">
+          <p class="helper-text">Monto total que figura al cierre del resumen.</p>
+        </div>
+        <div class="form-group">
+          <label for="payAmountInput">Monto que vas a pagar ($)</label>
+          <input type="number" id="payAmountInput" value="35000" step="5000" oninput="calc()">
+          <p class="helper-text" id="helperPayType">Pago mínimo sugerido (~10% del total).</p>
+        </div>
+      </div>
+
+      <div class="input-row" style="margin-top: 14px;">
+        <div class="form-group">
+          <label for="tnaInput">TNA Compensatoria del Banco (%)</label>
+          <input type="number" id="tnaInput" value="105" step="1" oninput="calc()">
+          <p class="helper-text">Tasa Nominal Anual (fijada por el BCRA / Banco).</p>
+        </div>
+        <div class="form-group">
+          <label for="daysInput">Días hasta el próximo vencimiento</label>
+          <input type="number" id="daysInput" value="30" step="1" oninput="calc()">
+        </div>
+      </div>
+    </section>
+
+    <!-- Hero Result -->
+    <section class="hero-result">
+      <div class="hero-label">Recargo Total en tu Próximo Resumen</div>
+      <div class="hero-amount" id="interestHero">$ 36.850</div>
+      <div class="hero-subrow">
+        <div class="hero-subitem">
+          <div class="hero-sublabel">Nueva Deuda al Mes Siguiente</div>
+          <div class="hero-subval highlight" id="nextDebtHero">$ 351.850</div>
+        </div>
+        <div class="hero-subitem">
+          <div class="hero-sublabel">Interés Compensatorio</div>
+          <div class="hero-subval" id="rawInterestHero">$ 27.200</div>
+        </div>
+        <div class="hero-subitem">
+          <div class="hero-sublabel">IVA (21%) + Sellos</div>
+          <div class="hero-subval" id="taxesHero">$ 9.650</div>
+        </div>
+      </div>
+      <div class="alert-box" id="alertBox">
+        ⚠️ <strong>Atención al Efecto Bola de Nieve:</strong> Aunque pagaste $35.000, el mes que viene vas a deber <strong>MÁS</strong> dinero ($351.850) incluso sin haber comprado absolutamente nada.
+      </div>
+    </section>
+
+    <!-- Desglose de Costos de Refinanciación -->
+    <section class="card">
+      <div class="card-title">Desglose de la Refinanciación Obligatoria</div>
+      <table class="breakdown-table">
+        <tbody>
+          <tr>
+            <td class="col-label">
+              Capital Financiado
+              <span class="col-sub">Deuda que dejaste pendiente este mes</span>
+            </td>
+            <td class="col-val" id="rowPending">$ 315.000</td>
+          </tr>
+          <tr>
+            <td class="col-label">
+              Intereses Compensatorios del Banco
+              <span class="col-sub" id="subTnaRate">Tasa mensual efectiva ~8.63%</span>
+            </td>
+            <td class="col-val" id="rowInterest">$ 27.200</td>
+          </tr>
+          <tr>
+            <td class="col-label">
+              IVA sobre Intereses (21%)
+              <span class="col-sub">Impuesto nacional que percibe el banco</span>
+            </td>
+            <td class="col-val" id="rowIva">$ 5.712</td>
+          </tr>
+          <tr>
+            <td class="col-label">
+              Impuesto de Sellos Provincial (~1.2%)
+              <span class="col-sub">Tasa por financiamiento bancario</span>
+            </td>
+            <td class="col-val" id="rowSellos">$ 3.780</td>
+          </tr>
+          <tr style="border-top: 2px solid var(--border-strong);">
+            <td class="col-label" style="font-weight: 700; color: var(--accent);">
+              Costo de no pagar el total
+            </td>
+            <td class="col-val" id="rowTotalCost" style="font-weight: 700; color: var(--accent);">$ 36.692</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Tabla Rápida -->
+    <section class="card">
+      <div class="card-title">📊 Comparativa: Pagar el Mínimo vs Pagar Completo</div>
+      <div class="seo-table-wrap">
+        <table class="seo-table">
+          <thead>
+            <tr>
+              <th>Deuda Resumen</th>
+              <th>Pago Mínimo (10%)</th>
+              <th>Interés + Impuestos</th>
+              <th>Deuda a los 3 meses</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="strong">$ 150.000</td><td>$ 15.000</td><td>$ 15.700</td><td>$ 184.000</td></tr>
+            <tr><td class="strong">$ 350.000</td><td>$ 35.000</td><td>$ 36.700</td><td>$ 431.000</td></tr>
+            <tr><td class="strong">$ 600.000</td><td>$ 60.000</td><td>$ 62.900</td><td>$ 738.000</td></tr>
+            <tr><td class="strong">$ 1.000.000</td><td>$ 100.000</td><td>$ 104.800</td><td>$ 1.230.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- In-Page Responsive AdSense Slot -->
+    <div class="ad-slot-container">
+      <div style="font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Publicidad</div>
+      <ins class="adsbygoogle"
+           style="display:block; width: 100%;"
+           data-ad-client="ca-pub-3381238987477190"
+           data-ad-slot="9270280155"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- FAQ SEO -->
+    <section class="card">
+      <div class="card-title">❓ Preguntas Frecuentes sobre el Pago Mínimo</div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">¿Conviene pagar el mínimo o sacar un préstamo personal?</div>
+          <div class="faq-a">Casi siempre conviene pedir un préstamo personal en cuotas fijas o pedir prestado antes que refinanciar con el pago mínimo. La tasa de interés de la tarjeta suele ser la más cara del sistema financiero argentino, agravada por el IVA del 21% sobre intereses.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Qué pasa si pago menos del pago mínimo?</div>
+          <div class="faq-a">Entrás en mora automática. Se bloquea el plástico para nuevas compras, se informan los antecedentes al Veraz / Banco Central y se cobran intereses punitorios adicionales además de los compensatorios.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Family Interlinking Nav -->
+    <nav class="family-nav">
+      <span class="family-title">💵 Finanzas &amp; Herramientas Laborales</span>
+      <div class="family-links">
+        <span class="family-link active">💳 Pago Mínimo Tarjeta</span>
+        <a href="https://sebiglesias.com.ar/sueldo-neto/" class="family-link">💼 Sueldo Neto</a>
+        <a href="https://sebiglesias.com.ar/aguinaldo/" class="family-link">💰 Aguinaldo</a>
+        <a href="https://sebiglesias.com.ar/monotributo/" class="family-link">🧾 Monotributo</a>
+        <a href="https://sebiglesias.com.ar/billeteras/" class="family-link">📱 Rendimiento Billeteras</a>
+        <a href="https://sebiglesias.com.ar/plazo-fijo/" class="family-link">🏦 Plazo Fijo</a>
+      </div>
+    </nav>
+
+    <footer>
+      <p><a href="https://sebiglesias.com.ar/">← sebiglesias.com.ar</a> · Simuladores financieros para Argentina</p>
+    </footer>
+  </div>
+
+  <script>
+    function syncMinPayment() {
+      const debt = parseFloat(document.getElementById('totalDebtInput').value) || 0;
+      const minPay = Math.round(debt * 0.1);
+      document.getElementById('payAmountInput').value = minPay;
+      calc();
+    }
+
+    function calc() {
+      const totalDebt = parseFloat(document.getElementById('totalDebtInput').value) || 0;
+      const payAmount = parseFloat(document.getElementById('payAmountInput').value) || 0;
+      const tna = parseFloat(document.getElementById('tnaInput').value) || 105;
+      const days = parseInt(document.getElementById('daysInput').value) || 30;
+
+      const pending = Math.max(0, totalDebt - payAmount);
+      const interestRate = (tna / 100 / 365) * days;
+      const interest = Math.round(pending * interestRate);
+      const iva = Math.round(interest * 0.21);
+      const sellos = Math.round(pending * 0.012);
+      const totalExtra = interest + iva + sellos;
+      const nextDebt = pending + totalExtra;
+
+      document.getElementById('interestHero').innerText = '$ ' + totalExtra.toLocaleString('es-AR');
+      document.getElementById('nextDebtHero').innerText = '$ ' + nextDebt.toLocaleString('es-AR');
+      document.getElementById('rawInterestHero').innerText = '$ ' + interest.toLocaleString('es-AR');
+      document.getElementById('taxesHero').innerText = '$ ' + (iva + sellos).toLocaleString('es-AR');
+
+      document.getElementById('rowPending').innerText = '$ ' + pending.toLocaleString('es-AR');
+      document.getElementById('rowInterest').innerText = '$ ' + interest.toLocaleString('es-AR');
+      document.getElementById('rowIva').innerText = '$ ' + iva.toLocaleString('es-AR');
+      document.getElementById('rowSellos').innerText = '$ ' + sellos.toLocaleString('es-AR');
+      document.getElementById('rowTotalCost').innerText = '$ ' + totalExtra.toLocaleString('es-AR');
+      document.getElementById('subTnaRate').innerText = `TNA ${tna}% anual (~${(interestRate*100).toFixed(1)}% en ${days} días)`;
+
+      const alertBox = document.getElementById('alertBox');
+      if (payAmount >= totalDebt) {
+        alertBox.style.background = 'rgba(16, 185, 129, 0.15)';
+        alertBox.style.color = '#10b981';
+        alertBox.style.borderColor = '#10b981';
+        alertBox.innerHTML = '🎉 <strong>¡Excelente decisión!</strong> Pagando el total cancelás el 100% de la deuda sin regalarle ni un centavo al banco en intereses.';
+      } else if (nextDebt > totalDebt) {
+        alertBox.style.background = 'rgba(239, 68, 68, 0.15)';
+        alertBox.style.color = '#fca5a5';
+        alertBox.style.borderColor = 'rgba(239, 68, 68, 0.35)';
+        alertBox.innerHTML = `⚠️ <strong>Peligro de Bola de Nieve:</strong> Aunque pagás $${payAmount.toLocaleString('es-AR')}, el próximo mes deberás <strong>$${nextDebt.toLocaleString('es-AR')}</strong> (más de lo que debías hoy).`;
+      } else {
+        alertBox.style.background = 'rgba(245, 158, 11, 0.15)';
+        alertBox.style.color = '#fde68a';
+        alertBox.style.borderColor = '#f59e0b';
+        alertBox.innerHTML = `ℹ️ Amortización parcial: La deuda baja pero se te sumarán $${totalExtra.toLocaleString('es-AR')} de costo financiero puro.`;
+      }
+    }
+
+    calc();
+  </script>
+</body>
+</html>
